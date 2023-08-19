@@ -19,10 +19,10 @@ it itself.
 This is how we would defint the `JSONSerializable` typeclass:
 
 ```python
-from abc import abstractmethod
+from typeclass import Typeclass, typeclass_api
 
 class JSONSerializable(Typeclass):
-    @abstractmethod
+    @typeclass_api
     def serialize(self) -> dict:
         raise NotImplementedError
 ```
