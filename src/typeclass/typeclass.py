@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
 from extypes import extension, extend_type_with
 
 
@@ -12,6 +12,13 @@ class _TypeClassMeta(ABCMeta):
         }
 
     def __getitem__(cls, typ):
+        if typ is Ellipsis:
+            typ = cls
+        elif isinstance(typ, slice):
+            if typ.start is None and typ.stop is None:
+                typ = cls
+            else:
+                raise ValueError
         if typ in cls._implementations:
             return cls._implementations[typ]
         return _ImplMeta(cls.__name__ + f"[{typ.__name__}]", (_TypeClassImplementation,), {}, typeclass=cls, original=typ)
@@ -49,26 +56,12 @@ class _ImplMeta(type):
 
 
 class _TypeClassImplementation:
+    @classmethod
     def __init_subclass__(cls, typeclass=None, original=None) -> None:
         typeclass = typeclass or cls._typeclass
         original = original or cls._original
         typeclass[original] = cls
 
 
-class TypeClass(metaclass=_TypeClassMeta):
+class Typeclass(metaclass=_TypeClassMeta):
     ...
-
-
-class AsHex(TypeClass):
-    @abstractmethod
-    def hex(self) -> str: ...
-
-
-class _(AsHex[int]):
-    def hex(self):
-        return hex(self)
-
-
-assert isinstance(1, AsHex)
-assert issubclass(int, AsHex)
-print((0xfc).hex())
