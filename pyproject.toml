@@ -1,15 +1,20 @@
 [tool.poetry]
 name = "typeclass"
-version = "0.1.0"
+version = "0.1.1"
 description = "A small Python package that adds typeclasses"
-authors = ["Binyamin Y Cohen <binyamincohen555@gmail.com>"]
+authors = ["Xpo Development <dev@xpo.dev>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-extype = "^0.1.0"
+extype = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
+extype = "^1.1.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
