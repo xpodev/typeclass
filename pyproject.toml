@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "typeclass"
-version = "0.1.1"
+version = "0.1.2"
 description = "A small Python package that adds typeclasses"
 authors = ["Xpo Development <dev@xpo.dev>"]
 license = "MIT"
