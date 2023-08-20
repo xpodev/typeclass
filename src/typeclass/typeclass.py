@@ -1,5 +1,5 @@
 from abc import ABCMeta
-from extypes import extension, extend_type_with
+from extype import extension, extend_type_with
 
 
 class _TypeClassMeta(ABCMeta):
